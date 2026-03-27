@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>لعبة 1 - معلومات</title>
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: url('images/bg.jpg') no-repeat center center fixed;
+        background-size: cover;
+        color: #fff;
+    }
+    .overlay {
+        background: rgba(0,0,0,0.7);
+        width: 100%;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+    .container {
+        background: rgba(30,30,30,0.9);
+        border-radius: 15px;
+        padding: 30px;
+        max-width: 900px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+    .container img {
+        width: 400px;
+        border-radius: 10px;
+        transition: transform 0.3s;
+    }
+    .container img:hover {
+        transform: scale(1.05);
+    }
+    .info {
+        flex: 1;
+        min-width: 300px;
+    }
+    h1 { color: #ffdd00; margin-top: 0; }
+    p { line-height: 1.5; }
+    button {
+        padding: 12px 25px;
+        font-size: 18px;
+        margin: 10px 5px 0 0;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        background: linear-gradient(90deg, #00ffdd, #00cccc);
+        color: #000;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+    button:hover {
+        transform: scale(1.05);
+        background: linear-gradient(90deg, #00cccc, #00aaaa);
+    }
+</style>
+</head>
+<body>
+<div class="overlay">
+    <div class="container">
+        <img src=" c:\Users\SM\Downloads\10.jpg" alt="لعبة 1">
+        <div class="info">
+            <h1>لعبة 1</h1>
+            <p><strong>السعر:</strong> 20 دولار</p>
+            <p><strong>الوصف:</strong> لعبة أكشن ممتعة مع مستويات كثيرة وتحديات مثيرة.</p>
+            <p><strong>المميزات:</strong> رسومات رائعة، سرعة عالية، متعددة اللاعبين، تجربة ممتعة.</p>
+            <button onclick="buyAndGoToCart('لعبة 1', 20)">اشتري الآن</button>
+            <button onclick="window.location.href='index.html'">العودة للرئيسية</button>
+        </div>
+    </div>
+    <script>
+// جلب البيانات الحالية من localStorage أو إنشاء مصفوفة جديدة
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+// دالة لإضافة اللعبة والانتقال للسلة
+function buyAndGoToCart(gameName, price){
+    // أضف اللعبة فقط إذا لم تكن موجودة لتجنب التكرار
+    cart.push({name: gameName, price: price});
+    localStorage.setItem('cart', JSON.stringify(cart)); // حفظ البيانات في localStorage
+    window.location.href = 'cart.html'; // الانتقال إلى صفحة السلة
+}
+
+// تحديث العداد عند تحميل الصفحة (إذا أردت عداد السلة في الأعلى)
+window.addEventListener('load', () => {
+    let countElement = document.getElementById('cart-count');
+    if(countElement) countElement.innerText = cart.length;
+});
+</script>
+</div>
+</body>
+</html>
